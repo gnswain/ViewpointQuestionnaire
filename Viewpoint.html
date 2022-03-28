@@ -14283,11 +14283,10 @@ FROM t1, t2
 WHERE t2.mean = (SELECT max(mean)
                  FROM t1);</code></pre>
 <h3 id="B.-Assume-that-assignments-that-are-not-submitted-are-simply-not-entered-into-the-Assignments-table.-Write-a-SQL-query-that-returns-the-names-of-the-students-that-have-not-submitted-an-assignment."><strong>B.</strong> Assume that assignments that are not submitted are simply not entered into the <span style="color:#c7254e">Assignments</span> table. Write a SQL query that returns the names of the students that have not submitted an assignment.<a class="anchor-link" href="#B.-Assume-that-assignments-that-are-not-submitted-are-simply-not-entered-into-the-Assignments-table.-Write-a-SQL-query-that-returns-the-names-of-the-students-that-have-not-submitted-an-assignment.">&#182;</a></h3>
-<pre><code>WITH t1 AS (SELECT student_id as id, count(id) as cnt
-            FROM Assignments
-            GROUP BY student_id)
-SELECT max(cnt)
-FROM t1;</code></pre>
+<pre><code>SELECT name
+FROM Students
+WHERE id NOT IN (SELECT student_id
+                 FROM Assignments);</code></pre>
 <p>Now assume both tables are instead given to you as pandas DataFrame objects called <span style="color:#c7254e">students_df</span> and <span style="color:#c7254e">assignments_df</span>.</p>
 <h3 id="C.-Write-a-python-function,-utilizing-pandas,-that-takes-in-student_df-and-returns-a-new-DataFrame-of-the-same-id's-and-name's,-but-where-now-each-name-containing-the-letter-&#8220;e&#8221;-is-uppercased,-and-lowercased-otherwise-(e.g.-&#8220;Edward&#8221;-&#8594;-&#8220;EDWARD&#8221;,-&#8220;Bob&#8221;-&#8594;-&#8220;bob&#8221;)."><strong>C.</strong> Write a python function, utilizing pandas, that takes in <span style="color:#c7254e">student_df</span> and returns a new DataFrame of the same <span style="color:#c7254e">id</span>'s and <span style="color:#c7254e">name</span>'s, but where now each <span style="color:#c7254e">name</span> containing the letter &#8220;e&#8221; is uppercased, and lowercased otherwise (e.g. &#8220;Edward&#8221; &#8594; &#8220;EDWARD&#8221;, &#8220;Bob&#8221; &#8594; &#8220;bob&#8221;).<a class="anchor-link" href="#C.-Write-a-python-function,-utilizing-pandas,-that-takes-in-student_df-and-returns-a-new-DataFrame-of-the-same-id's-and-name's,-but-where-now-each-name-containing-the-letter-&#8220;e&#8221;-is-uppercased,-and-lowercased-otherwise-(e.g.-&#8220;Edward&#8221;-&#8594;-&#8220;EDWARD&#8221;,-&#8220;Bob&#8221;-&#8594;-&#8220;bob&#8221;).">&#182;</a></h3><p>This block imports panda and creates a small DataFrame for testing <strong>C</strong> and <strong>D</strong>.</p>
 
@@ -14956,7 +14955,7 @@ memory usage: 14.9+ KB
     </tr>
     <tr>
       <th>top</th>
-      <td>Walters, Lindsay E.</td>
+      <td>Rabbitt, Brian C.</td>
       <td>Employee</td>
       <td>$115,000.00</td>
       <td>Per Annum</td>
